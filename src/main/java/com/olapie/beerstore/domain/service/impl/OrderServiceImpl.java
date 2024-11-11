@@ -1,7 +1,6 @@
 package com.olapie.beerstore.domain.service.impl;
 
 import com.olapie.beerstore.domain.model.Order;
-import com.olapie.beerstore.domain.model.exception.OrderNotFoundException;
 import com.olapie.beerstore.domain.model.id.OrderId;
 import com.olapie.beerstore.domain.service.OrderService;
 
