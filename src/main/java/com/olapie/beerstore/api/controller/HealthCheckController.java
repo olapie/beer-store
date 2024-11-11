@@ -1,13 +1,11 @@
-package com.olapie.beerstore.controller;
+package com.olapie.beerstore.api.controller;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.olapie.beerstore.BeerStoreApplication;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,11 +17,6 @@ public class HealthCheckController {
 
     @Value("${spring.application.name}")
     private String applicationName;
-
-//    private HealthCheckController() {
-//        logger.debug("New HealthCheckController");
-//    }
-
     @Data
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     private static class PingResponse {
