@@ -19,3 +19,6 @@ specify socks proxy in gradle.properties
 
 ./gradlew bootJar generates jar files in build/libs
 
+./gradlew dependencies 
+
+./gradlew dependencies --configuration <dependency-configuration-name>

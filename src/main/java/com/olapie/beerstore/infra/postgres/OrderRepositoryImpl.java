@@ -9,6 +9,9 @@ import java.util.Optional;
 public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Optional<Order> get(OrderId orderId) {
-        return Optional.empty();
+        if (orderId.getValue().compareTo("1") < 0) {
+            return Optional.empty();
+        }
+        return Optional.of(new Order(orderId));
     }
 }
