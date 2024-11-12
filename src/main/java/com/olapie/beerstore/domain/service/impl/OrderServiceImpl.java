@@ -15,9 +15,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Optional<Order> get(OrderId orderId) {
-        if (Objects.equals(orderId.getValue(), "0")) {
-            return Optional.empty();
-        }
-        return Optional.of(new Order(orderId));
+        return orderRepository.get(orderId);
     }
 }

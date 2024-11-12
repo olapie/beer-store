@@ -4,6 +4,7 @@ import com.olapie.beerstore.domain.model.Order;
 import com.olapie.beerstore.domain.model.id.OrderId;
 import com.olapie.beerstore.domain.repository.OrderRepository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public class OrderRepositoryImpl implements OrderRepository {
@@ -12,6 +13,6 @@ public class OrderRepositoryImpl implements OrderRepository {
         if (orderId.getValue().compareTo("1") < 0) {
             return Optional.empty();
         }
-        return Optional.of(new Order(orderId));
+        return Optional.of(new Order(orderId, BigDecimal.valueOf(10.98)));
     }
 }
