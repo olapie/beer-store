@@ -24,6 +24,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-log4j2")
+	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2")
 	runtimeOnly("org.apache.logging.log4j:log4j-layout-template-json")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

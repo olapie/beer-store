@@ -22,3 +22,6 @@ specify socks proxy in gradle.properties
 ./gradlew dependencies 
 
 ./gradlew dependencies --configuration <dependency-configuration-name>
+
+
+mybatis https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/zh/index.html
