@@ -4,12 +4,12 @@ import com.olapie.beerstore.api.model.Order;
 import com.olapie.beerstore.domain.model.exception.OrderNotFoundException;
 import com.olapie.beerstore.domain.model.id.OrderId;
 import com.olapie.beerstore.domain.service.OrderService;
+import com.olapie.beerstore.util.annotation.AutoLogging;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -18,6 +18,7 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    @AutoLogging
     @GetMapping("/{id}")
     public Order get(@PathVariable String id) throws OrderNotFoundException {
         var orderId = OrderId.of(id);
@@ -26,6 +27,11 @@ public class OrderController {
             throw  new OrderNotFoundException(orderId);
         }
         return Order.from(optionalOrder.get());
+    }
+
+    @GetMapping("/list")
+    public List<Order> list(@RequestParam String nextToken, @RequestParam int limit) {
+        return new ArrayList<>();
     }
 
 }
