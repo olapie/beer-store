@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface OrderService {
     Optional<Order> get(OrderId orderId);
 
-    List<Order> list(int limit, String nextToken);
+    List<Order> list(String nextToken, int limit);
 }

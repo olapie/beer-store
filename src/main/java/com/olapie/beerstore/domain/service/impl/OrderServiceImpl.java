@@ -6,11 +6,12 @@ import com.olapie.beerstore.domain.repository.OrderRepository;
 import com.olapie.beerstore.domain.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class OrderServiceImpl implements OrderService {
+
+    private final AtomicLong idCounter = new AtomicLong();
     @Autowired
     private OrderRepository orderRepository;
 
@@ -20,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> list(int limit, String nextToken) {
-        return new ArrayList<>();
+    public List<Order> list(String nextToken, int limit) {
+        return orderRepository.list(nextToken, limit);
     }
 }

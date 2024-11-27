@@ -24,13 +24,14 @@ public class OrderController {
         var orderId = OrderId.of(id);
         var optionalOrder = orderService.get(orderId);
         if (optionalOrder.isEmpty()) {
-            throw  new OrderNotFoundException(orderId);
+            throw new OrderNotFoundException(orderId);
         }
         return Order.from(optionalOrder.get());
     }
 
     @GetMapping("/list")
-    public List<Order> list(@RequestParam String nextToken, @RequestParam int limit) {
+    @AutoLogging
+    public List<Order> list(@RequestParam(defaultValue = "", name = "next_token") String nextToken, @RequestParam(defaultValue = "20") int limit) {
         return new ArrayList<>();
     }
 
