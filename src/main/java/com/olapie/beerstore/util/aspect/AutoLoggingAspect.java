@@ -2,6 +2,7 @@ package com.olapie.beerstore.util.aspect;
 
 import com.olapie.beerstore.util.annotation.AutoLogging;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -18,41 +19,41 @@ public class AutoLoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(AutoLoggingAspect.class);
     @Around("@annotation(com.olapie.beerstore.util.annotation.AutoLogging)")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
-        var start = Instant.now();
-        Object returnedValue = joinPoint.proceed();
-        var millis = Duration.between(start, Instant.now()).toMillis();
-        var args = joinPoint.getArgs();
         var signature = joinPoint.getSignature();
-
-        if (!(signature instanceof MethodSignature)) {
-            return returnedValue;
+        if (!(signature instanceof MethodSignature methodSignature)) {
+            logger.warn("{} is not MethodSignature", signature);
+            return joinPoint.proceed();
         }
 
-        var methodSignature = (MethodSignature)signature;
-        var argNames = methodSignature.getParameterNames();
         var annotation = methodSignature.getMethod().getAnnotation(AutoLogging.class);
-
-        var argStringBuilder = new StringBuilder();
-        argStringBuilder.append(signature.getDeclaringTypeName());
-        argStringBuilder.append('.');
-        argStringBuilder.append(signature.getName());
-        argStringBuilder.append('(');
-        for (int i = 0; i < args.length; i++) {
-            argStringBuilder.append(argNames[i]);
-            if (annotation.input()) {
-                argStringBuilder.append("=");
-                argStringBuilder.append(args[i]);
-            }
-            if (i != args.length-1) {
-                argStringBuilder.append(", ");
-            }
+        String methodDescription = null;
+        if (annotation.input() || annotation.output()) {
+            methodDescription = getMethodDescription(methodSignature);
         }
-        argStringBuilder.append(")");
+        if (annotation.input()) {
+            logger.info("{} input: {}", methodDescription, joinPoint.getArgs());
+        }
+        Object output = joinPoint.proceed();
         if (annotation.output()) {
-            argStringBuilder.append(", returned: ");
-            argStringBuilder.append(returnedValue);
+            logger.info("{} output: {}", methodDescription, output);
         }
-        logger.info("{} {}ms", argStringBuilder, millis);
-        return returnedValue;
+        return output;
+    }
+
+    private String getMethodDescription(MethodSignature signature) {
+        var parameterNames = signature.getParameterNames();
+        var builder = new StringBuilder();
+        builder.append(signature.getDeclaringTypeName());
+        builder.append('.');
+        builder.append(signature.getName());
+        builder.append('(');
+        for (int i = 0; i < parameterNames.length; i++) {
+            builder.append(parameterNames[i]);
+            if (i != parameterNames.length-1) {
+                builder.append(", ");
+            }
+        }
+        builder.append(")");
+        return builder.toString();
     }
 }
