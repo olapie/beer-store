@@ -6,7 +6,7 @@ public class BeerId extends StringId {
         super(value);
     }
 
-    public static OrderId of(String value) {
-        return new OrderId(value);
+    public static BeerId of(String value) {
+        return new BeerId(value);
     }
 }

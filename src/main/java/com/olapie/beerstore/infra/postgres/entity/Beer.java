@@ -1,6 +1,5 @@
-package com.olapie.beerstore.domain.model;
+package com.olapie.beerstore.infra.postgres.entity;
 
-import com.olapie.beerstore.domain.model.id.BeerId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +10,7 @@ import java.math.BigDecimal;
 @Builder
 @Data
 public class Beer {
-    private BeerId id;
+    private String id;
     private String name;
     private BigDecimal price;
 }

@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface BeerRepository {
     Optional<Beer> get(BeerId beerId);
+    void save(Beer beer);
 }
