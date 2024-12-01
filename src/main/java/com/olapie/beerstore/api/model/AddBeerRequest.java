@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 public class AddBeerRequest {
-    @NotBlank(message = "missing beer name")
+//    @NotBlank(message = "missing beer name")
     @Size(max = 32)
     private String name;
 
