@@ -28,6 +28,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4")
 	implementation("org.postgresql:postgresql:42.7.4")
+	implementation("com.kohlschutter.junixsocket:junixsocket-core:2.10.1")
 	runtimeOnly("org.apache.logging.log4j:log4j-layout-template-json")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

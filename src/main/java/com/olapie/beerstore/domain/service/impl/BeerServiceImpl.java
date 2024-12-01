@@ -16,7 +16,9 @@ public class BeerServiceImpl implements BeerService {
 
     @Override
     public Optional<Beer> add(AddBeerParams params) {
-        return Optional.empty();
+        var beer = Beer.builder().name(params.getName()).price(params.getPrice()).build();
+        beerRepository.save(beer);
+        return Optional.of(beer);
     }
 
     @Override
