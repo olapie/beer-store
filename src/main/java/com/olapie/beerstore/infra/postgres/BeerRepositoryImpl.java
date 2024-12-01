@@ -25,7 +25,8 @@ public class BeerRepositoryImpl implements BeerRepository {
     @Override
     public void save(Beer beer) {
         if (beer.getId() == null) {
-            beerMapper.insert(fromModel(beer));
+           var id = beerMapper.insert(fromModel(beer));
+           beer.setId(BeerId.of(id.toString()));
         } else {
             beerMapper.update(fromModel(beer));
         }

@@ -13,9 +13,10 @@ public interface BeerMapper {
     @Select("SELECT id, name, price FROM beer WHERE id=#{id}")
     Beer getById(@Param("id") String id);
 
-    @Insert("INSERT INTO beer(name, price) VALUES(#{name}, #{price})")
+    // use @Insert if "RETURNING id" is removed
+    @Select("INSERT INTO beer(name, price) VALUES(#{name}, #{price}) RETURNING id")
     Integer insert(Beer beer);
 
     @Update("UPDATE beer SET name=#{name}, price=#{price} WHERE id=#{id}")
-    Integer update(Beer beer);
+    void update(Beer beer);
 }

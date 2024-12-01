@@ -1,7 +1,7 @@
 package com.olapie.beerstore.api.controller;
 
 import com.olapie.beerstore.api.model.AddBeerRequest;
-import com.olapie.beerstore.domain.model.Beer;
+import com.olapie.beerstore.api.model.Beer;
 import com.olapie.beerstore.domain.model.params.AddBeerParams;
 import com.olapie.beerstore.domain.service.BeerService;
 import com.olapie.beerstore.util.annotation.AutoLogging;
@@ -29,6 +29,6 @@ public class BeerController {
         if (optionalBeer.isEmpty()) {
             throw new Exception("unable to add beer");
         }
-        return optionalBeer.get();
+        return Beer.from(optionalBeer.get());
     }
 }
