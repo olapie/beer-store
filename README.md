@@ -27,3 +27,8 @@ specify socks proxy in gradle.properties
 mybatis https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/zh/index.html
 
 spring AOP make use of aspectj's annotations, but doesn't use the implementation, spring AOP use proxy instead which is runtime weaving.   
+
+
+
+mybatis annotation https://www.baeldung.com/jdk-com-sun-proxy 
+
